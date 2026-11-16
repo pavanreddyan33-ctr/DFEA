@@ -1,0 +1,40 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evidence Analysis</title>
+</head>
+<body>
+
+    <h1>Evidence Analysis Result</h1>
+
+    <h3>Evidence ID: {{ evidence_id }}</h3>
+
+    <h3>File Name: {{ filename }}</h3>
+
+    <h3>SHA-256 Hash</h3>
+    <p>{{ file_hash }}</p>
+
+    <h3>File Metadata</h3>
+
+    {% for key, value in metadata.items() %}
+        <p><b>{{ key }}:</b> {{ value }}</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>File Integrity Verification</h2>
+
+    <form action="/verify/{{ evidence_id }}" method="GET">
+        <button type="submit">
+            Verify Integrity
+        </button>
+    </form>
+
+    <br>
+
+    <a href="/">Upload Another File</a>
+
+</body>
+</html>
+```

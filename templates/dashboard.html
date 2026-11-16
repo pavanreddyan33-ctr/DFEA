@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DFEA Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .card h2 {
+            color: #172554;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #172554;
+            color: white;
+        }
+
+        .button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .verified {
+            color: green;
+            font-weight: bold;
+        }
+
+        .modified {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Digital Forensics Evidence Analyzer</h1>
+    <p>Evidence Management Dashboard</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>{{ total }}</h2>
+        <p>Total Evidence Files</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ verified }}</h2>
+        <p>Verified Files</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ modified }}</h2>
+        <p>Modified Files</p>
+    </div>
+
+</div>
+
+<h2>Recent Evidence Records</h2>
+
+<table>
+    <tr>
+        <th>Evidence ID</th>
+        <th>File Name</th>
+        <th>Upload Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for item in evidence_list %}
+    <tr>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[1] }}</td>
+        <td>{{ item[2] }}</td>
+
+        <td>
+            {% if item[3] == "VERIFIED" %}
+                <span class="verified">VERIFIED</span>
+            {% elif item[3] == "MODIFIED" %}
+                <span class="modified">MODIFIED</span>
+            {% else %}
+                {{ item[3] }}
+            {% endif %}
+        </td>
+
+        <td>
+            <a href="{{ url_for('verify', evidence_id=item[0]) }}">
+                Verify
+            </a>
+            |
+            <a href="{{ url_for('generate_report', evidence_id=item[0]) }}">
+                PDF Report
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<center

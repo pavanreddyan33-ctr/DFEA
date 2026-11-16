@@ -1,0 +1,9 @@
+venv/
+env/
+__pycache__/
+*.pyc
+uploads/
+reports/
+forensics.db
+.env
+.vscode/
