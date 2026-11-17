@@ -1,9 +1,29 @@
+# Python virtual environment
 venv/
 env/
+
+# Python cache files
 __pycache__/
 *.pyc
+
+# Uploaded evidence files
 uploads/
+
+# Generated PDF reports
 reports/
+
+# SQLite database
 forensics.db
+
+# Environment variables
 .env
+
+# VS Code settings
 .vscode/
+
+# Temporary debugging files
+check_paths.py
+fix_paths.py
+
+# Test evidence file
+sample.txt
